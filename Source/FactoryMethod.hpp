@@ -8,8 +8,8 @@ class Computer
 public:
   Computer(std::string computer, std::string model) :
     computer(computer),
-    model(model) {};
-  ~Computer() {};
+    model(model){};
+  ~Computer(){};
 
 public:
   std::string computer;
@@ -19,8 +19,8 @@ public:
 class ComputerFactory
 {
 public:
-  ComputerFactory() {};
-  ~ComputerFactory() {};
+  ComputerFactory(){};
+  ~ComputerFactory(){};
   Computer* createComputer(std::string computer, std::string model);
 };
 

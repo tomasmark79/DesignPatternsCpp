@@ -6,24 +6,26 @@
 class Singleton
 {
 private:
-    Singleton() {
-        std::cout << "Singleton instantiated" << std::endl;
-    };
-    ~Singleton() {};
+  Singleton()
+  {
+    std::cout << "Singleton instantiated" << std::endl;
+  };
+  ~Singleton(){};
 
 public:
-    static Singleton& getInstance() {
-        static Singleton instance;
-        return instance;
-    }
+  static Singleton& getInstance()
+  {
+    static Singleton instance;
+    return instance;
+  }
 
-    Singleton(Singleton const&) = delete;
-    void operator=(Singleton const&) = delete;
+  Singleton(Singleton const&) = delete;
+  void operator=(Singleton const&) = delete;
 
-    void print() {
-        std::cout << "Singleton printed" << std::endl;
-    }
-
+  void print()
+  {
+    std::cout << "Singleton printed" << std::endl;
+  }
 };
 
 #endif

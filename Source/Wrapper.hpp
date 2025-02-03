@@ -6,23 +6,23 @@
 class Wrapper
 {
 public:
-    Wrapper() {
-        std::cout << "Wrapper instantiated" << std::endl;
-    };
+  Wrapper()
+  {
+    std::cout << "Wrapper instantiated" << std::endl;
+  };
 
 private:
-
 };
 
 class Adaptee
 {
 public:
-    Adaptee() {
-        std::cout << "Adaptee instantiated" << std::endl;
-    };
+  Adaptee()
+  {
+    std::cout << "Adaptee instantiated" << std::endl;
+  };
+
 private:
-
 };
-
 
 #endif
