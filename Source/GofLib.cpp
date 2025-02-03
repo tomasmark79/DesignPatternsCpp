@@ -4,6 +4,7 @@
 #include <iostream>
 #include <goflib/version.h>
 
+#include <Builder.hpp>
 #include <Prototype.hpp>
 #include <Singleton.hpp>
 #include <FactoryMethod.hpp>
@@ -13,6 +14,14 @@ GofLib::GofLib()
   std::cout << "--- GofLib v." << GOFLIB_VERSION << " instantiated ---"
             << std::endl;
 
+  // Builder
+  ConcreteBuilder* concreteBuilder = new ConcreteBuilder();
+  Director* director = new Director();
+  director->setBuilder(concreteBuilder);
+  director->construct();
+  delete director;
+  delete concreteBuilder;
+    
   // Prototype
   Prototype* prototype1 = new ConcretePrototype1();
   Prototype* prototype2 = new ConcretePrototype2();
