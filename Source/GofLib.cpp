@@ -4,6 +4,7 @@
 #include <iostream>
 #include <goflib/version.h>
 
+#include <Prototype.hpp>
 #include <Singleton.hpp>
 #include <FactoryMethod.hpp>
 
@@ -12,7 +13,17 @@ GofLib::GofLib()
   std::cout << "--- GofLib v." << GOFLIB_VERSION << " instantiated ---"
             << std::endl;
 
-  // Singleton
+  // Prototype
+  Prototype* prototype1 = new ConcretePrototype1();
+  Prototype* prototype2 = new ConcretePrototype2();
+  Prototype* prototype3 = prototype1->clone();
+  Prototype* prototype4 = prototype2->clone();
+  prototype1->print();
+  prototype2->print();
+  prototype3->print();
+  prototype4->print();
+    
+  // Singleton - anti-pattern
   Singleton& singleton = Singleton::getInstance();
   singleton.print();
 
