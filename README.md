@@ -6,8 +6,8 @@
 
 ## Overview
 
-DesignPatterns C++
-
-Singleton
-Factory Method
+DesignPatterns C++  
+  
+Singleton  
+Factory Method  
 
