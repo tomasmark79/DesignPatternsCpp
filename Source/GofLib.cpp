@@ -4,6 +4,7 @@
 #include <iostream>
 #include <goflib/version.h>
 
+#include <Wrapper.hpp>
 #include <Builder.hpp>
 #include <Prototype.hpp>
 #include <Singleton.hpp>
@@ -13,6 +14,13 @@ GofLib::GofLib()
 {
   std::cout << "--- GofLib v." << GOFLIB_VERSION << " instantiated ---"
             << std::endl;
+
+  // Wrapper / Adapter
+  Wrapper* wrapper = new Wrapper();
+  Adaptee* adaptee = new Adaptee();
+  delete adaptee;
+  delete wrapper;
+
 
   // Builder
   ConcreteBuilder* concreteBuilder = new ConcreteBuilder();
