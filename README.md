@@ -1,4 +1,4 @@
-# MarkWareVCMake
+# DesignPatternsCpp
 
 [![Ubuntu](https://github.com/tomasmark79/DesignPatternsCpp/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/tomasmark79/DesignPatternsCpp/actions/workflows/ubuntu.yml)
 [![MacOS](https://github.com/tomasmark79/DesignPatternsCpp/actions/workflows/macos.yml/badge.svg)](https://github.com/tomasmark79/DesignPatternsCpp/actions/workflows/macos.yml)
@@ -11,3 +11,6 @@ DesignPatterns C++
 Singleton  
 Factory Method  
 
+---
+
+**[MarkWareVCMake](https://github.com/tomasmark79/MarkWareVCMake)** – This CMake project template makes development faster and more efficient. ⚡ With a modular design, pre-set configurations, and support for modern development practices, it’s an excellent foundation for any project. 🌟
