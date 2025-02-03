@@ -8,3 +8,6 @@
 
 DesignPatterns C++
 
+Singleton
+Factory Method
+
