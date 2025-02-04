@@ -26,6 +26,10 @@ State
 Memento  
 Interpreter  
 Mediator  
+Iterator/Enumerator  
+Chain of Responsibility
+  
+
 
 ---
 

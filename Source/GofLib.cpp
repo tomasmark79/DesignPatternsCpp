@@ -5,6 +5,8 @@
 #include <memory>
 #include <goflib/version.h>
 
+#include <ChainOfResponsibility.hpp>
+#include <Iterator.hpp>
 #include <Mediator.hpp>
 #include <Interpreter.hpp>
 #include <Memento.hpp>
@@ -29,13 +31,34 @@ GofLib::GofLib()
   std::cout << "--- GofLib v." << GOFLIB_VERSION << " instantiated ---"
             << std::endl;
 
+  // Chain of Responsibility
+  ConcreteChainA concreteChainA;
+  ConcreteChainB concreteChainB;
+  ConcreteChainC concreteChainC;
+  concreteChainA.setNext(&concreteChainB);
+  concreteChainB.setNext(&concreteChainC);
+  concreteChainA.handle(-1);
+  concreteChainA.handle(0);
+  concreteChainA.handle(1);
+   
+  // Iterator / Enumerator
+  int array[] = {1, 2, 3, 4, 5};
+  ConcreteIterator concreteIterator(array, sizeof(array) / sizeof(array[0]));
+  std::cout << "Iterator output: ";
+  for (concreteIterator.first(); !concreteIterator.isDone();
+       concreteIterator.next())
+  {
+    std::cout << concreteIterator.currentItem() << " ";
+  }
+  std::cout << std::endl;
+
   // Mediator
   ConcreteMediator concreteMediator;
   ConcreteColleagueA concreteColleagueA(&concreteMediator);
   ConcreteColleagueB concreteColleagueB(&concreteMediator);
   concreteColleagueA.notify(1);
   concreteColleagueB.notify(2);
-  
+
   // Interpreter terminal expression
   InterpreterContext interpreterContext("add");
   AbstractExpression* abstractExpression = new TerminalExpression();
