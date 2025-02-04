@@ -17,7 +17,12 @@ Facade
 Proxy  
 Decorator  
 Flyweight  
-
+Composite  
+Bridge  
+Observer  
+Strategy  
+Template Method  
+State  
 
 ---
 

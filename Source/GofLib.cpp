@@ -5,6 +5,8 @@
 #include <memory>
 #include <goflib/version.h>
 
+#include <State.hpp>
+#include <TemplateMethod.hpp>
 #include <Strategy.hpp>
 #include <Observer.hpp>
 #include <Bridge.hpp>
@@ -23,6 +25,18 @@ GofLib::GofLib()
 {
   std::cout << "--- GofLib v." << GOFLIB_VERSION << " instantiated ---"
             << std::endl;
+  // State
+  ContextState* contextState = new ContextState(new ConcreteStateA());
+  contextState->request();
+  contextState->setState(new ConcreteStateB());
+  contextState->request();
+  delete contextState;
+  
+  // Template Method
+  ConcreteTemplateMethodA concreteTemplateMethodA;
+  concreteTemplateMethodA.templateMethod();
+  ConcreteTemplateMethodB concreteTemplateMethodB;
+  concreteTemplateMethodB.templateMethod();
 
   // Strategy
   Context* context = new Context(new ConcreteStrategyA());
