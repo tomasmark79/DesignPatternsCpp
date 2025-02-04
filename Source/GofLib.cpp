@@ -5,6 +5,7 @@
 #include <memory>
 #include <goflib/version.h>
 
+#include <Strategy.hpp>
 #include <Observer.hpp>
 #include <Bridge.hpp>
 #include <Composite.hpp>
@@ -22,6 +23,14 @@ GofLib::GofLib()
 {
   std::cout << "--- GofLib v." << GOFLIB_VERSION << " instantiated ---"
             << std::endl;
+
+  // Strategy
+  Context* context = new Context(new ConcreteStrategyA());
+  context->contextInterface();
+  delete context;
+  context = new Context(new ConcreteStrategyB());
+  context->contextInterface();
+  delete context;
 
   // Observer
   ConcreteSubject* concreteSubject = new ConcreteSubject();

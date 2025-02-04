@@ -14,7 +14,7 @@ public:
 class ConcreteObserverA : public Observer
 {
 public:
-  virtual ~ConcreteObserverA() {} 
+  virtual ~ConcreteObserverA() {}
   void update() override
   {
     std::cout << "ConcreteObserverA::update()" << std::endl;
@@ -33,9 +33,7 @@ public:
 
 class Subject
 {
-
 public:
-
   virtual void attach(Observer* observer) = 0;
   virtual void detach(Observer* observer) = 0;
   virtual void notify() = 0;
