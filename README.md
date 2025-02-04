@@ -15,6 +15,9 @@ Builder
 Wrapper/Adapter  
 Facade  
 Proxy  
+Decorator  
+Flyweight  
+
 
 ---
 
