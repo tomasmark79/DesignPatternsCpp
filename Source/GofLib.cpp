@@ -5,6 +5,7 @@
 #include <memory>
 #include <goflib/version.h>
 
+#include <Composite.hpp>
 #include <Flyweight.hpp>
 #include <Decorator.hpp>
 #include <Proxy.hpp>
@@ -20,6 +21,26 @@ GofLib::GofLib()
   std::cout << "--- GofLib v." << GOFLIB_VERSION << " instantiated ---"
             << std::endl;
 
+  // Composite
+  ComponentComposite* root = new Composite("root");
+  ComponentComposite* branch1 = new Composite("branch1");
+  ComponentComposite* branch2 = new Composite("branch2");
+  ComponentComposite* leaf1 = new Leaf("leaf1");
+  ComponentComposite* leaf2 = new Leaf("leaf2");
+  ComponentComposite* leaf3 = new Leaf("leaf3");
+  root->add(branch1);
+  root->add(branch2);
+  branch1->add(leaf1);
+  branch1->add(leaf2);
+  branch2->add(leaf3);
+  root->operation();
+  delete root;
+  delete branch1;
+  delete branch2;
+  delete leaf1;
+  delete leaf2;
+  delete leaf3;
+  
   // Flyweight
   FlyweightFactory* flyweightFactory = new FlyweightFactory();
   std::shared_ptr<Flyweight> flyweight1 = flyweightFactory->getFlyweight("A");
@@ -29,7 +50,7 @@ GofLib::GofLib()
   flyweight2->operation();
   flyweight3->operation();
   delete flyweightFactory;
-  
+
   // Decorator
   std::shared_ptr<Component> component = std::make_shared<ConcreteComponent>();
   std::shared_ptr<Component> decoratorA =
