@@ -5,6 +5,7 @@
 #include <memory>
 #include <goflib/version.h>
 
+#include <Flyweight.hpp>
 #include <Decorator.hpp>
 #include <Proxy.hpp>
 #include <Facade.hpp>
@@ -19,6 +20,16 @@ GofLib::GofLib()
   std::cout << "--- GofLib v." << GOFLIB_VERSION << " instantiated ---"
             << std::endl;
 
+  // Flyweight
+  FlyweightFactory* flyweightFactory = new FlyweightFactory();
+  std::shared_ptr<Flyweight> flyweight1 = flyweightFactory->getFlyweight("A");
+  std::shared_ptr<Flyweight> flyweight2 = flyweightFactory->getFlyweight("B");
+  std::shared_ptr<Flyweight> flyweight3 = flyweightFactory->getFlyweight("A");
+  flyweight1->operation();
+  flyweight2->operation();
+  flyweight3->operation();
+  delete flyweightFactory;
+  
   // Decorator
   std::shared_ptr<Component> component = std::make_shared<ConcreteComponent>();
   std::shared_ptr<Component> decoratorA =
