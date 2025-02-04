@@ -5,6 +5,7 @@
 #include <memory>
 #include <goflib/version.h>
 
+#include <Observer.hpp>
 #include <Bridge.hpp>
 #include <Composite.hpp>
 #include <Flyweight.hpp>
@@ -22,6 +23,19 @@ GofLib::GofLib()
   std::cout << "--- GofLib v." << GOFLIB_VERSION << " instantiated ---"
             << std::endl;
 
+  // Observer
+  ConcreteSubject* concreteSubject = new ConcreteSubject();
+  Observer* observerA = new ConcreteObserverA();
+  Observer* observerB = new ConcreteObserverB();
+  concreteSubject->attach(observerA);
+  concreteSubject->attach(observerB);
+  concreteSubject->notify();
+  concreteSubject->detach(observerA);
+  concreteSubject->notify();
+  delete concreteSubject;
+  delete observerA;
+  delete observerB;
+
   // Bridge
   Implementor* implementorA = new ConcreteImplementorA();
   Implementor* implementorB = new ConcreteImplementorB();
@@ -31,7 +45,8 @@ GofLib::GofLib()
   bridgeB->operation();
   delete bridgeA;
   delete bridgeB;
-  // No need to delete implementorA and implementorB as they are deleted by Bridge's destructor
+  // No need to delete implementorA and implementorB as they are deleted by
+  // Bridge's destructor
 
   // Composite
   ComponentComposite* root = new Composite("root");
@@ -52,7 +67,7 @@ GofLib::GofLib()
   delete leaf1;
   delete leaf2;
   delete leaf3;
-  
+
   // Flyweight
   FlyweightFactory* flyweightFactory = new FlyweightFactory();
   std::shared_ptr<Flyweight> flyweight1 = flyweightFactory->getFlyweight("A");
