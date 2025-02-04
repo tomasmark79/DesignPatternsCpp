@@ -5,6 +5,7 @@
 #include <memory>
 #include <goflib/version.h>
 
+#include <Interpreter.hpp>
 #include <Memento.hpp>
 #include <State.hpp>
 #include <TemplateMethod.hpp>
@@ -26,6 +27,22 @@ GofLib::GofLib()
 {
   std::cout << "--- GofLib v." << GOFLIB_VERSION << " instantiated ---"
             << std::endl;
+
+
+  // Interpreter terminal expression
+  InterpreterContext interpreterContext("add");
+  AbstractExpression* expression = new TerminalExpression();
+  expression->interpret(interpreterContext);
+  std::cout << "Interpreter output: add: " << interpreterContext.output() << std::endl;
+  delete expression;
+
+  // Interpreter non-terminal expression
+  interpreterContext.setInput("add sub mul");
+  expression = new NonTerminalExpression();
+  expression->interpret(interpreterContext);
+  std::cout << "Interpreter output: add sub mul: " << interpreterContext.output() << std::endl;
+  delete expression;
+  
 
   // Memento
   Originator originator;
