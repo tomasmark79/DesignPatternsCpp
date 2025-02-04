@@ -5,6 +5,7 @@
 #include <memory>
 #include <goflib/version.h>
 
+#include <Bridge.hpp>
 #include <Composite.hpp>
 #include <Flyweight.hpp>
 #include <Decorator.hpp>
@@ -20,6 +21,17 @@ GofLib::GofLib()
 {
   std::cout << "--- GofLib v." << GOFLIB_VERSION << " instantiated ---"
             << std::endl;
+
+  // Bridge
+  Implementor* implementorA = new ConcreteImplementorA();
+  Implementor* implementorB = new ConcreteImplementorB();
+  Bridge* bridgeA = new RefinedAbstraction(implementorA);
+  Bridge* bridgeB = new RefinedAbstraction(implementorB);
+  bridgeA->operation();
+  bridgeB->operation();
+  delete bridgeA;
+  delete bridgeB;
+  // No need to delete implementorA and implementorB as they are deleted by Bridge's destructor
 
   // Composite
   ComponentComposite* root = new Composite("root");
