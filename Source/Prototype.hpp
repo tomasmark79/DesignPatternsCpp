@@ -22,7 +22,7 @@ public:
   {
     std::cout << "ConcretePrototype1 created" << std::endl;
   };
-  ConcretePrototype1(const ConcretePrototype1& prototype){};
+  ConcretePrototype1(const ConcretePrototype1& prototype [[maybe_unused]]){};
   virtual ~ConcretePrototype1(){};
   virtual Prototype* clone()
   {
@@ -43,7 +43,7 @@ public:
   {
     std::cout << "ConcretePrototype2 created" << std::endl;
   };
-  ConcretePrototype2(const ConcretePrototype2& prototype){};
+  ConcretePrototype2(const ConcretePrototype2& prototype [[maybe_unused]]){};
   virtual ~ConcretePrototype2(){};
   virtual Prototype* clone()
   {

@@ -2,8 +2,10 @@
 
 // #include <EmojiTools/EmojiTools.hpp> // yet dissabled
 #include <iostream>
+#include <memory>
 #include <goflib/version.h>
 
+#include <Proxy.hpp>
 #include <Facade.hpp>
 #include <Wrapper.hpp>
 #include <Builder.hpp>
@@ -15,6 +17,11 @@ GofLib::GofLib()
 {
   std::cout << "--- GofLib v." << GOFLIB_VERSION << " instantiated ---"
             << std::endl;
+
+  // Proxy
+  std::shared_ptr<RealSubject> real_subject = std::make_shared<RealSubject>();
+  Proxy proxy(real_subject);
+  proxy.Request();
 
   // Facade
   Facade* facade = new Facade();
