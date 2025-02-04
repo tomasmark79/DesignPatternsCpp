@@ -23,7 +23,9 @@ Observer
 Strategy  
 Template Method  
 State  
-Memento
+Memento  
+Interpreter  
+Mediator  
 
 ---
 

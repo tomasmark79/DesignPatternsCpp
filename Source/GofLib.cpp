@@ -5,6 +5,7 @@
 #include <memory>
 #include <goflib/version.h>
 
+#include <Mediator.hpp>
 #include <Interpreter.hpp>
 #include <Memento.hpp>
 #include <State.hpp>
@@ -28,21 +29,27 @@ GofLib::GofLib()
   std::cout << "--- GofLib v." << GOFLIB_VERSION << " instantiated ---"
             << std::endl;
 
-
+  // Mediator
+  ConcreteMediator concreteMediator;
+  ConcreteColleagueA concreteColleagueA(&concreteMediator);
+  ConcreteColleagueB concreteColleagueB(&concreteMediator);
+  concreteColleagueA.notify(1);
+  concreteColleagueB.notify(2);
+  
   // Interpreter terminal expression
   InterpreterContext interpreterContext("add");
-  AbstractExpression* expression = new TerminalExpression();
-  expression->interpret(interpreterContext);
-  std::cout << "Interpreter output: add: " << interpreterContext.output() << std::endl;
-  delete expression;
-
+  AbstractExpression* abstractExpression = new TerminalExpression();
+  abstractExpression->interpret(interpreterContext);
+  std::cout << "Interpreter output: add: " << interpreterContext.output()
+            << std::endl;
+  delete abstractExpression;
   // Interpreter non-terminal expression
   interpreterContext.setInput("add sub mul");
-  expression = new NonTerminalExpression();
-  expression->interpret(interpreterContext);
-  std::cout << "Interpreter output: add sub mul: " << interpreterContext.output() << std::endl;
-  delete expression;
-  
+  abstractExpression = new NonTerminalExpression();
+  abstractExpression->interpret(interpreterContext);
+  std::cout << "Interpreter output: add sub mul: "
+            << interpreterContext.output() << std::endl;
+  delete abstractExpression;
 
   // Memento
   Originator originator;
