@@ -23,6 +23,7 @@ Observer
 Strategy  
 Template Method  
 State  
+Memento
 
 ---
 

@@ -5,6 +5,7 @@
 #include <memory>
 #include <goflib/version.h>
 
+#include <Memento.hpp>
 #include <State.hpp>
 #include <TemplateMethod.hpp>
 #include <Strategy.hpp>
@@ -25,13 +26,24 @@ GofLib::GofLib()
 {
   std::cout << "--- GofLib v." << GOFLIB_VERSION << " instantiated ---"
             << std::endl;
+
+  // Memento
+  Originator originator;
+  Caretaker caretaker(&originator);
+  originator.setState(1);
+  caretaker.saveState();
+  originator.setState(2);
+  std::cout << "State: " << originator.getState() << std::endl;
+  caretaker.restoreState();
+  std::cout << "Restored State: " << originator.getState() << std::endl;
+
   // State
   ContextState* contextState = new ContextState(new ConcreteStateA());
   contextState->request();
   contextState->setState(new ConcreteStateB());
   contextState->request();
   delete contextState;
-  
+
   // Template Method
   ConcreteTemplateMethodA concreteTemplateMethodA;
   concreteTemplateMethodA.templateMethod();
