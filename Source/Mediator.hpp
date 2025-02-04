@@ -43,6 +43,4 @@ public:
   ConcreteColleagueB(Mediator* mediator) : Colleague(mediator) {}
 };
 
-
-
 #endif
