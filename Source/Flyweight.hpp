@@ -18,30 +18,30 @@ private:
   std::string intrinsicState;
 
 public:
-    ConcreteFlyweight(const std::string& intrinsicState) : intrinsicState(intrinsicState) {}
-    void operation() const override
-    {
-        std::cout << "ConcreteFlyweight with intrinsic state: " << intrinsicState << std::endl;
-    }
-    };
+  ConcreteFlyweight(const std::string& intrinsicState) :
+    intrinsicState(intrinsicState)
+  {}
+  void operation() const override
+  {
+    std::cout << "ConcreteFlyweight with intrinsic state: " << intrinsicState
+              << std::endl;
+  }
+};
 
 class FlyweightFactory
 {
 private:
-    std::map<std::string, std::shared_ptr<Flyweight>> flyweights;
+  std::map<std::string, std::shared_ptr<Flyweight>> flyweights;
 
 public:
-    std::shared_ptr<Flyweight> getFlyweight(const std::string& key)
+  std::shared_ptr<Flyweight> getFlyweight(const std::string& key)
+  {
+    if (flyweights.find(key) == flyweights.end())
     {
-        if (flyweights.find(key) == flyweights.end())
-        {
-            flyweights[key] = std::make_shared<ConcreteFlyweight>(key);
-        }
-        return flyweights[key];
+      flyweights[key] = std::make_shared<ConcreteFlyweight>(key);
     }
+    return flyweights[key];
+  }
 };
-
-
-
 
 #endif

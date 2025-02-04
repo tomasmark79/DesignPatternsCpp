@@ -12,7 +12,8 @@ public:
   virtual void Operation() const = 0;
 };
 
-// Implements the Component interface and provides a basic implementation of the Operation method.
+// Implements the Component interface and provides a basic implementation of the
+// Operation method.
 class ConcreteComponent : public Component
 {
 public:
@@ -22,7 +23,8 @@ public:
   }
 };
 
-// Abstract class that implements the Component interface and contains a pointer to a component.
+// Abstract class that implements the Component interface and contains a pointer
+// to a component.
 class Decorator : public Component
 {
 protected:
