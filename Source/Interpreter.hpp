@@ -20,8 +20,7 @@ public:
     input_ = input;
   }
 
-  int output() 
-  const
+  int output() const
   {
     return output_;
   }
