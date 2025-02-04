@@ -5,6 +5,7 @@
 #include <memory>
 #include <goflib/version.h>
 
+#include <Decorator.hpp>
 #include <Proxy.hpp>
 #include <Facade.hpp>
 #include <Wrapper.hpp>
@@ -17,6 +18,14 @@ GofLib::GofLib()
 {
   std::cout << "--- GofLib v." << GOFLIB_VERSION << " instantiated ---"
             << std::endl;
+
+  // Decorator
+  std::shared_ptr<Component> component = std::make_shared<ConcreteComponent>();
+  std::shared_ptr<Component> decoratorA =
+    std::make_shared<ConcreteDecoratorA>(component);
+  std::shared_ptr<Component> decoratorB =
+    std::make_shared<ConcreteDecoratorB>(decoratorA);
+  decoratorB->Operation();
 
   // Proxy
   std::shared_ptr<RealSubject> real_subject = std::make_shared<RealSubject>();
