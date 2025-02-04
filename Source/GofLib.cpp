@@ -5,6 +5,7 @@
 #include <memory>
 #include <goflib/version.h>
 
+#include <Command.hpp>
 #include <ChainOfResponsibility.hpp>
 #include <Iterator.hpp>
 #include <Mediator.hpp>
@@ -30,6 +31,8 @@ GofLib::GofLib()
 {
   std::cout << "--- GofLib v." << GOFLIB_VERSION << " instantiated ---"
             << std::endl;
+
+  // Command
 
   // Chain of Responsibility
   ConcreteChainA concreteChainA;
