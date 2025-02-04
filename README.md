@@ -8,8 +8,13 @@
 
 DesignPatterns C++  
   
-Singleton  
 Factory Method  
+Singleton  
+Prototype  
+Builder  
+Wrapper/Adapter  
+Facade  
+Proxy  
 
 ---
 
