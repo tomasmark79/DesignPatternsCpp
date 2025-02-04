@@ -27,7 +27,7 @@ Memento
 Interpreter  
 Mediator  
 Iterator/Enumerator  
-Chain of Responsibility
+Chain of Responsibility  
 Command  
 
 ---

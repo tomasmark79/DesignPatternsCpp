@@ -3,6 +3,15 @@
 
 #include <iostream>
 
+class Receiver
+{
+public:
+  void action()
+  {
+    std::cout << "Receiver action" << std::endl;
+  }
+};
+
 class Command
 {
 public:
@@ -14,17 +23,20 @@ class ConcreteCommand : public Command
 public:
   void execute() override
   {
+    if (receiver)
+    {
+      receiver->action();
+    }
     std::cout << "ConcreteCommand executed" << std::endl;
   }
-};
 
-class Receiver
-{
-public:
-  void action()
+  void setReceiver(Receiver* receiver)
   {
-    std::cout << "Receiver action" << std::endl;
+    this->receiver = receiver;
   }
+
+private:
+  Receiver* receiver;
 };
 
 class Invoker

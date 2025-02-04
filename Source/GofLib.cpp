@@ -33,6 +33,13 @@ GofLib::GofLib()
             << std::endl;
 
   // Command
+  ConcreteCommand concreteCommand;
+  Receiver receiver;
+  concreteCommand.setReceiver(&receiver);
+  concreteCommand.execute();
+  Invoker invoker;
+  invoker.setCommand(&concreteCommand);
+  invoker.executeCommand();
 
   // Chain of Responsibility
   ConcreteChainA concreteChainA;
@@ -43,7 +50,7 @@ GofLib::GofLib()
   concreteChainA.handle(-1);
   concreteChainA.handle(0);
   concreteChainA.handle(1);
-   
+
   // Iterator / Enumerator
   int array[] = {1, 2, 3, 4, 5};
   ConcreteIterator concreteIterator(array, sizeof(array) / sizeof(array[0]));
