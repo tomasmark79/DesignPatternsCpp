@@ -1,9 +1,9 @@
-#include "GofLib/GofLib.hpp"
+#include "DesignPatternsCppLib/DesignPatternsCppLib.hpp"
 
 // #include <EmojiTools/EmojiTools.hpp> // yet dissabled
 #include <iostream>
 #include <memory>
-#include <goflib/version.h>
+#include <designpatternscpplib/version.h>
 
 #include <Controller.hpp>
 
@@ -29,9 +29,9 @@
 #include <Singleton.hpp>
 #include <FactoryMethod.hpp>
 
-GofLib::GofLib()
+DesignPatternsCppLib::DesignPatternsCppLib()
 {
-  std::cout << "--- GofLib v." << GOFLIB_VERSION << " instantiated ---"
+  std::cout << "--- DesignPatternsCppLib v." << DESIGNPATTERNSCPPLIB_VERSION << " instantiated ---"
             << std::endl;
 
   // Controller
@@ -237,7 +237,7 @@ GofLib::GofLib()
   delete computer;
 }
 
-GofLib::~GofLib()
+DesignPatternsCppLib::~DesignPatternsCppLib()
 {
-  std::cout << "--- GofLib uninstantiated ---" << std::endl;
+  std::cout << "--- DesignPatternsCppLib uninstantiated ---" << std::endl;
 }

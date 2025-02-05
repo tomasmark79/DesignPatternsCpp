@@ -15,7 +15,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # ==============================================================================
 # Project attributes
 # ==============================================================================
-set(LIBRARY_NAME GofLib)
+set(LIBRARY_NAME DesignPatternsCppLib)
 string(TOLOWER "${LIBRARY_NAME}" LIBRARY_NAME_LOWER)
 set(LIBRARY_NAMESPACE dsdotname)
 project(

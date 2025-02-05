@@ -1,6 +1,6 @@
 
-#include <GofLib/GofLib.hpp>
-#include <goflib/version.h>
+#include <DesignPatternsCppLib/DesignPatternsCppLib.hpp>
+#include <designpatternscpplib/version.h>
 #include <chrono>
 #include <iostream>
 #include <memory>
@@ -8,7 +8,7 @@
 
 int main()
 {
-  std::unique_ptr<GofLib> lib = std::make_unique<GofLib>(); // cpp14 +
+  std::unique_ptr<DesignPatternsCppLib> lib = std::make_unique<DesignPatternsCppLib>(); // cpp14 +
 
   return 0;
 }
