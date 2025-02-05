@@ -7,10 +7,22 @@
 ## Overview
 
 DesignPatterns C++  
-  
+
+# Grasp
+Controller  
+Creator  
+High cohesion  
+Indirection  
+Information expert  
+Low coupling  
+Polymorphism  
+Protected variations  
+Pure fabrication  
+
+# GoF  
 Factory Method  
 Singleton  
-Prototype  
+Prototype/Clone  
 Builder  
 Wrapper/Adapter  
 Facade  
