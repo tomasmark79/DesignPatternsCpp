@@ -1,0 +1,36 @@
+@startuml
+class Product {
+    - partA: std::string
+    - partB: std::string
+    - partC: std::string
+    + setPartA(partA: std::string)
+    + setPartB(partB: std::string)
+    + setPartC(partC: std::string)
+    + show()
+}
+
+abstract class Builder {
+    + buildPartA()
+    + buildPartB()
+    + buildPartC()
+    + getProduct(): Product
+}
+
+class ConcreteBuilder {
+    - product: Product*
+    + buildPartA()
+    + buildPartB()
+    + buildPartC()
+    + getProduct(): Product
+}
+
+class Director {
+    - builder: Builder*
+    + setBuilder(builder: Builder*)
+    + construct()
+}
+
+Director --> Builder : uses
+ConcreteBuilder --|> Builder : implements
+ConcreteBuilder --> Product : creates
+@enduml

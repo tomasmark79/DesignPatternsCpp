@@ -199,9 +199,11 @@ GofLib::GofLib()
   Director* director = new Director();
   director->setBuilder(concreteBuilder);
   director->construct();
+  Product product = concreteBuilder->getProduct();
+  product.show();
   delete director;
   delete concreteBuilder;
-
+  
   // Prototype
   Prototype* prototype1 = new ConcretePrototype1();
   Prototype* prototype2 = new ConcretePrototype2();
