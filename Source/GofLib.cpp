@@ -5,6 +5,8 @@
 #include <memory>
 #include <goflib/version.h>
 
+#include <Controller.hpp>
+
 #include <Command.hpp>
 #include <ChainOfResponsibility.hpp>
 #include <Iterator.hpp>
@@ -31,6 +33,14 @@ GofLib::GofLib()
 {
   std::cout << "--- GofLib v." << GOFLIB_VERSION << " instantiated ---"
             << std::endl;
+
+  // Controller
+  std::string model = "model";
+  std::string view = "view";
+  Controller* controller = new Controller(model, view);
+  controller->handleInput();
+  controller->updateView();
+  delete controller;
 
   // Command
   ConcreteCommand concreteCommand;
@@ -203,8 +213,8 @@ GofLib::GofLib()
   product.show();
   delete director;
   delete concreteBuilder;
-  
-  // Prototype
+
+  // Prototype/Clone
   Prototype* prototype1 = new ConcretePrototype1();
   Prototype* prototype2 = new ConcretePrototype2();
   Prototype* prototype3 = prototype1->clone();
