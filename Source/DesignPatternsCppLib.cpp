@@ -5,6 +5,7 @@
 #include <memory>
 #include <designpatternscpplib/version.h>
 
+#include <ObjectPool.hpp>
 #include <Servant.hpp>
 #include <PureFabrication.hpp>
 #include <ProtectedVariations.hpp>
@@ -43,6 +44,14 @@ DesignPatternsCppLib::DesignPatternsCppLib()
   std::cout << "--- DesignPatternsCppLib v." << DESIGNPATTERNSCPPLIB_VERSION
             << " instantiated ---" << std::endl;
 
+  // Object Pool
+  std::unique_ptr<ObjectPool> objectPool =
+    std::make_unique<ConcreteObjectPool>();
+  objectPool->operation();
+  std::unique_ptr<ObjectPool> objectPool2 = objectPool->acquireObject();
+  objectPool2->operation();
+  objectPool->releaseObject(std::move(objectPool2));
+
   // Servant
   Servant servant;
   Client client(1);
@@ -51,7 +60,7 @@ DesignPatternsCppLib::DesignPatternsCppLib()
   client2.accept(servant);
   std::cout << "Servant output: " << client.getValue() << std::endl;
   std::cout << "Servant output: " << client2.getValue() << std::endl;
-  
+
   // Pure Fabrication
   PureFabrication pureFabrication;
 

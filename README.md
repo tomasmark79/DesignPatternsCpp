@@ -19,6 +19,8 @@ Polymorphism
 Protected variations  
 Pure fabrication  
 Servant  
+Object Pool  
+
 
 # GoF  
 Factory Method  
