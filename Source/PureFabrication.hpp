@@ -19,10 +19,10 @@
 class PureFabrication
 {
 public:
-    PureFabrication()
-    {
-        std::cout << "PureFabrication::PureFabrication()" << std::endl;
-    }
+  PureFabrication()
+  {
+    std::cout << "PureFabrication::PureFabrication()" << std::endl;
+  }
 };
 
 #endif
