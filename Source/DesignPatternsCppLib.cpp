@@ -5,6 +5,7 @@
 #include <memory>
 #include <designpatternscpplib/version.h>
 
+#include <Creator.hpp>
 #include <Controller.hpp>
 
 #include <Command.hpp>
@@ -34,6 +35,11 @@ DesignPatternsCppLib::DesignPatternsCppLib()
   std::cout << "--- DesignPatternsCppLib v." << DESIGNPATTERNSCPPLIB_VERSION << " instantiated ---"
             << std::endl;
 
+  // Creator
+  Creator *creator = new Creator();
+  creator->createProduct();
+  delete creator;
+  
   // Controller
   std::string model = "model";
   std::string view = "view";

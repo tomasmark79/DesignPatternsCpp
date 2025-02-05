@@ -15,11 +15,11 @@
 class Creator
 {
 public:
-    Creator();
-    ~Creator();
-
-private:
-
+  void createProduct()
+  {
+    std::cout << "Creator::createProduct()" << std::endl;
+  }
 };
+
 
 #endif
