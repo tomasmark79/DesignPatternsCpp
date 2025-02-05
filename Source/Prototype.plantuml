@@ -1,0 +1,28 @@
+@startuml
+title Prototype Design Pattern
+
+abstract class Prototype {
+  +Prototype()
+  +~Prototype()
+  +clone() : Prototype
+  +print() : void
+}
+
+class ConcretePrototype1 {
+  +ConcretePrototype1()
+  +~ConcretePrototype1()
+  +clone() : Prototype
+  +print() : void
+}
+
+class ConcretePrototype2 {
+  +ConcretePrototype2()
+  +~ConcretePrototype2()
+  +clone() : Prototype
+  +print() : void
+}
+
+Prototype <|-- ConcretePrototype1
+Prototype <|-- ConcretePrototype2
+
+@enduml

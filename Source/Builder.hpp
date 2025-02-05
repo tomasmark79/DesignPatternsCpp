@@ -2,34 +2,20 @@
 #define BUILDER_H
 
 // Description:
-// Builder pattern is a creational design pattern that lets you
-// construct complex objects step by step.
-// The pattern allows you to produce different types and representations
-// of an object using the same construction code.
-//
-//    ┌───────────────────────┐                                    
-//    │ConcreteBuilder        │   ┌───────────────────────────────┐
-//    ├───────────────────────┤   │Director                       │
-//    │- product: Product*    │   ├───────────────────────────────┤
-//    │+ buildPartA()         │   │- builder: Builder*            │
-//    │+ buildPartB()         │   │+ setBuilder(builder: Builder*)│
-//    │+ buildPartC()         │   │+ construct()                  │
-//    │+ getProduct(): Product│   └───────────────────────────────┘
-//    └───────────────────────┘                                    
-//                 |                                               
-//                 |                                               
-// ┌──────────────────────────────┐                                
-// │Product                       │   ┌───────────────────────┐    
-// ├──────────────────────────────┤   │Builder                │    
-// │- partA: std::string          │   ├───────────────────────┤    
-// │- partB: std::string          │   │+ buildPartA()         │    
-// │- partC: std::string          │   │+ buildPartB()         │    
-// │+ setPartA(partA: std::string)│   │+ buildPartC()         │    
-// │+ setPartB(partB: std::string)│   │+ getProduct(): Product│    
-// │+ setPartC(partC: std::string)│   └───────────────────────┘    
-// │+ show()                      │                                
-// └──────────────────────────────┘                                 
-// Tomáš Mark (c) 2025
+// Builder is a creational design pattern that lets you construct complex
+// objects step by step. The pattern allows you to produce different types and
+// representations of an object using the same construction code.
+
+// Usage:
+// 1. you want your code to be able to create different representations of some
+// product (for example, stone and wooden houses).
+// 2. Composite trees or other complex objects.
+// 3. nstruct products that should be built step by step.
+// 4. you want to construct different products using the same set of components.
+// 5. you need to build a product in a specific order.
+// 6. you want to construct an object using a step-by-step approach.
+// 7. you want to construct an object from many other objects.
+// 8. you want to construct an object with lots of parameters.
 
 #include <iostream>
 #include <string>
@@ -55,8 +41,8 @@ public:
 
   void show() const
   {
-    std::cout << "Product Parts: " << m_partA << ", " << m_partB << ", " << m_partC
-              << std::endl;
+    std::cout << "Product Parts: " << m_partA << ", " << m_partB << ", "
+              << m_partC << std::endl;
   }
 
 private:
@@ -89,7 +75,8 @@ public:
     std::cout << "ConcreteBuilder instantiated" << std::endl;
   }
 
-  ~ConcreteBuilder() {
+  ~ConcreteBuilder()
+  {
     delete m_product;
   }
 
@@ -113,8 +100,8 @@ public:
     return *m_product;
   }
 
-  private:
-    Product* m_product;
+private:
+  Product* m_product;
 };
 
 // Director class is the class that will direct the builder to build the product
@@ -140,4 +127,5 @@ private:
   Builder* m_builder;
 };
 
+// Tomáš Mark (c) 2025
 #endif
