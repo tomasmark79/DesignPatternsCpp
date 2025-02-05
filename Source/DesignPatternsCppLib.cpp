@@ -5,6 +5,7 @@
 #include <memory>
 #include <designpatternscpplib/version.h>
 
+#include <ImmutableObjects.hpp>
 #include <ObjectPool.hpp>
 #include <Servant.hpp>
 #include <PureFabrication.hpp>
@@ -44,6 +45,14 @@ DesignPatternsCppLib::DesignPatternsCppLib()
   std::cout << "--- DesignPatternsCppLib v." << DESIGNPATTERNSCPPLIB_VERSION
             << " instantiated ---" << std::endl;
 
+  // Immutable Objects
+  std::unique_ptr<ImmutableObjects> immutableObjects =
+    std::make_unique<ConcreteImmutableObjects>("name", 1);
+  immutableObjects->operation();
+  std::cout << "ImmutableObjects name: " << immutableObjects->getName()
+            << " value: " << immutableObjects->getValue() << std::endl;
+            
+  
   // Object Pool
   std::unique_ptr<ObjectPool> objectPool =
     std::make_unique<ConcreteObjectPool>();
