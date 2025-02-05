@@ -18,6 +18,7 @@ Low coupling
 Polymorphism  
 Protected variations  
 Pure fabrication  
+Servant  
 
 # GoF  
 Factory Method  
