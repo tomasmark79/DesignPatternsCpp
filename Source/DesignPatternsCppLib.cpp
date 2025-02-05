@@ -45,7 +45,13 @@ DesignPatternsCppLib::DesignPatternsCppLib()
 
   // Servant
   Servant servant;
-
+  Client client(1);
+  Client client2(2);
+  client.accept(servant);
+  client2.accept(servant);
+  std::cout << "Servant output: " << client.getValue() << std::endl;
+  std::cout << "Servant output: " << client2.getValue() << std::endl;
+  
   // Pure Fabrication
   PureFabrication pureFabrication;
 
@@ -261,7 +267,6 @@ DesignPatternsCppLib::DesignPatternsCppLib()
   prototype->print();
   clone->print();
   delete prototype;
-  
 
   // Singleton - anti-pattern
   Singleton& singleton = Singleton::getInstance();
