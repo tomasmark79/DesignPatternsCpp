@@ -8,7 +8,8 @@
 
 int main()
 {
-  std::unique_ptr<DesignPatternsCppLib> lib = std::make_unique<DesignPatternsCppLib>(); // cpp14 +
+  std::unique_ptr<DesignPatternsCppLib> lib =
+    std::make_unique<DesignPatternsCppLib>(); // cpp14 +
 
   return 0;
 }

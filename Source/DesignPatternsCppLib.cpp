@@ -5,6 +5,13 @@
 #include <memory>
 #include <designpatternscpplib/version.h>
 
+#include <PureFabrication.hpp>
+#include <ProtectedVariations.hpp>
+#include <Polymorphism.hpp>
+#include <LowCoupling.hpp>
+#include <InformationExpert.hpp>
+#include <Indirection.hpp>
+#include <HighCohesion.hpp>
 #include <Creator.hpp>
 #include <Controller.hpp>
 
@@ -32,14 +39,38 @@
 
 DesignPatternsCppLib::DesignPatternsCppLib()
 {
-  std::cout << "--- DesignPatternsCppLib v." << DESIGNPATTERNSCPPLIB_VERSION << " instantiated ---"
-            << std::endl;
+  std::cout << "--- DesignPatternsCppLib v." << DESIGNPATTERNSCPPLIB_VERSION
+            << " instantiated ---" << std::endl;
+
+  // Pure Fabrication
+  PureFabrication pureFabrication;
+  
+  // Protected Variations
+  ProtectedVariations protectedVariations;
+
+  // Polymorphism
+  Animal* animal = new Dog();
+  animal->sound();
+  animal = new Cat();
+  animal->sound();
+
+  // Low Coupling
+  LowCoupling lowCoupling;
+
+  // Information Expert
+  InformationExpert informationExpert;
+
+  // Indirection
+  Indirection indirection;
+
+  // High Cohesion
+  HighCohesion highCohesion;
 
   // Creator
-  Creator *creator = new Creator();
+  Creator* creator = new Creator();
   creator->createProduct();
   delete creator;
-  
+
   // Controller
   std::string model = "model";
   std::string view = "view";
