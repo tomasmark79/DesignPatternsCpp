@@ -51,8 +51,7 @@ DesignPatternsCppLib::DesignPatternsCppLib()
   immutableObjects->operation();
   std::cout << "ImmutableObjects name: " << immutableObjects->getName()
             << " value: " << immutableObjects->getValue() << std::endl;
-            
-  
+
   // Object Pool
   std::unique_ptr<ObjectPool> objectPool =
     std::make_unique<ConcreteObjectPool>();
