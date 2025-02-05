@@ -5,6 +5,7 @@
 #include <memory>
 #include <designpatternscpplib/version.h>
 
+#include <Servant.hpp>
 #include <PureFabrication.hpp>
 #include <ProtectedVariations.hpp>
 #include <Polymorphism.hpp>
@@ -42,9 +43,12 @@ DesignPatternsCppLib::DesignPatternsCppLib()
   std::cout << "--- DesignPatternsCppLib v." << DESIGNPATTERNSCPPLIB_VERSION
             << " instantiated ---" << std::endl;
 
+  // Servant
+  Servant servant;
+
   // Pure Fabrication
   PureFabrication pureFabrication;
-  
+
   // Protected Variations
   ProtectedVariations protectedVariations;
 
@@ -252,14 +256,12 @@ DesignPatternsCppLib::DesignPatternsCppLib()
   delete concreteBuilder;
 
   // Prototype/Clone
-  Prototype* prototype1 = new ConcretePrototype1();
-  Prototype* prototype2 = new ConcretePrototype2();
-  Prototype* prototype3 = prototype1->clone();
-  Prototype* prototype4 = prototype2->clone();
-  prototype1->print();
-  prototype2->print();
-  prototype3->print();
-  prototype4->print();
+  Prototype* prototype = new ConcretePrototype1();
+  std::unique_ptr<Prototype> clone = prototype->clone();
+  prototype->print();
+  clone->print();
+  delete prototype;
+  
 
   // Singleton - anti-pattern
   Singleton& singleton = Singleton::getInstance();

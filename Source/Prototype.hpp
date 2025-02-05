@@ -2,6 +2,7 @@
 #define PROTOTYPE_H
 
 #include <iostream>
+#include <memory>
 
 // Description:
 // Prototype is a creational design pattern that
@@ -25,8 +26,8 @@ public:
     std::cout << "Prototype instantiated" << std::endl;
   }
   virtual ~Prototype() = default;
-  virtual Prototype* clone() = 0;
-  virtual void print() = 0;
+  virtual std::unique_ptr<Prototype> clone() const = 0;
+  virtual void print() const = 0;
 };
 
 class ConcretePrototype1 : public Prototype
@@ -40,13 +41,13 @@ public:
                      [[maybe_unused]]) = default;
   virtual ~ConcretePrototype1() = default;
 
-  virtual Prototype* clone() override
+  std::unique_ptr<Prototype> clone() const override
   {
     std::cout << "ConcretePrototype1 cloned" << std::endl;
-    return new ConcretePrototype1(*this);
+    return std::make_unique<ConcretePrototype1>(*this);
   }
 
-  virtual void print() override
+  virtual void print() const override
   {
     std::cout << "ConcretePrototype1 printed" << std::endl;
   }
@@ -63,13 +64,13 @@ public:
                      [[maybe_unused]]) = default;
   virtual ~ConcretePrototype2() = default;
 
-  virtual Prototype* clone() override
+  std::unique_ptr<Prototype> clone() const override
   {
     std::cout << "ConcretePrototype2 cloned" << std::endl;
-    return new ConcretePrototype2(*this);
+    return std::make_unique<ConcretePrototype2>(*this);
   }
 
-  virtual void print() override
+  virtual void print() const override
   {
     std::cout << "ConcretePrototype2 printed" << std::endl;
   }
