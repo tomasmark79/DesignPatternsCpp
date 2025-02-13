@@ -9,10 +9,7 @@
 DesignPatterns C++  
 
 # IoC
-IoCBasic DI (Dependency Injection)  
-IoCAbstract DI  
-IoCLivetimeScope DI  
-IoCConstructor DI  
+Dependency Injection
   
 # Grasp
 Controller  

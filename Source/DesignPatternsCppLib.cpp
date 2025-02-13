@@ -47,12 +47,13 @@ DesignPatternsCppLib::DesignPatternsCppLib()
   std::cout << "--- DesignPatternsCppLib v." << DESIGNPATTERNSCPPLIB_VERSION
             << " instantiated ---" << std::endl;
 
+  // Dependency Injection
   IoCContainer container;
-  container.registerService<IDatabase, Database>(LifetimeScope::Singleton);
-  container.registerServiceWithDependencies<ICarRepository, CarRepository>();
-  container.registerServiceWithDependencies<ICarManager, CarManager>();
-  auto carManager = container.resolve<ICarManager>();
-  carManager->show();
+  {
+    IoCScope scope(container);
+    auto carManager = container.resolve<ICarManager>();
+    carManager->show();
+  } // Automatically clears the container
 
   // Immutable Objects
   std::unique_ptr<ImmutableObjects> immutableObjects =
