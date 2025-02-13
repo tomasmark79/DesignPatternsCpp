@@ -7,8 +7,9 @@
 class ImmutableObjects
 {
 public:
-  ImmutableObjects(const std::string& name, int value)
-    : m_name(name), m_value(value)
+  ImmutableObjects(const std::string& name, int value) :
+    m_name(name),
+    m_value(value)
   {
     std::cout << "ImmutableObjects instantiated" << std::endl;
   }
@@ -16,8 +17,14 @@ public:
 
   virtual void operation() const = 0;
 
-  const std::string& getName() const { return m_name; }
-  int getValue() const { return m_value; }
+  const std::string& getName() const
+  {
+    return m_name;
+  }
+  int getValue() const
+  {
+    return m_value;
+  }
 
 private:
   const std::string m_name;
@@ -27,8 +34,8 @@ private:
 class ConcreteImmutableObjects : public ImmutableObjects
 {
 public:
-  ConcreteImmutableObjects(const std::string& name, int value)
-    : ImmutableObjects(name, value)
+  ConcreteImmutableObjects(const std::string& name, int value) :
+    ImmutableObjects(name, value)
   {
     std::cout << "ConcreteImmutableObjects instantiated" << std::endl;
   }
