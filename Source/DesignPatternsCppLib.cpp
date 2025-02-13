@@ -5,6 +5,8 @@
 #include <memory>
 #include <designpatternscpplib/version.h>
 
+#include <IoCDependencyInjection.hpp>
+
 #include <ImmutableObjects.hpp>
 #include <ObjectPool.hpp>
 #include <Servant.hpp>
@@ -44,6 +46,13 @@ DesignPatternsCppLib::DesignPatternsCppLib()
 {
   std::cout << "--- DesignPatternsCppLib v." << DESIGNPATTERNSCPPLIB_VERSION
             << " instantiated ---" << std::endl;
+
+  IoCContainer container;
+  container.registerService<IDatabase, Database>(LifetimeScope::Singleton);
+  container.registerServiceWithDependencies<ICarRepository, CarRepository>();
+  container.registerServiceWithDependencies<ICarManager, CarManager>();
+  auto carManager = container.resolve<ICarManager>();
+  carManager->show();
 
   // Immutable Objects
   std::unique_ptr<ImmutableObjects> immutableObjects =
