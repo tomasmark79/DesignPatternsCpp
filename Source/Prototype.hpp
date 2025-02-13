@@ -18,60 +18,48 @@
 // 4. When you want to avoid a constructor telescoping anti-pattern.
 // 5. When you want to avoid a factory class hierarchy.
 
-class Prototype
-{
+class Prototype {
 public:
-  Prototype()
-  {
-    std::cout << "Prototype instantiated" << std::endl;
-  }
+  Prototype() { std::cout << "Prototype instantiated" << std::endl; }
   virtual ~Prototype() = default;
   virtual std::unique_ptr<Prototype> clone() const = 0;
   virtual void print() const = 0;
 };
 
-class ConcretePrototype1 : public Prototype
-{
+class ConcretePrototype1 : public Prototype {
 public:
-  ConcretePrototype1()
-  {
+  ConcretePrototype1() {
     std::cout << "ConcretePrototype1 instantiated" << std::endl;
   }
-  ConcretePrototype1(const ConcretePrototype1& prototype
-                     [[maybe_unused]]) = default;
+  ConcretePrototype1(
+      const ConcretePrototype1& prototype [[maybe_unused]]) = default;
   virtual ~ConcretePrototype1() = default;
 
-  std::unique_ptr<Prototype> clone() const override
-  {
+  std::unique_ptr<Prototype> clone() const override {
     std::cout << "ConcretePrototype1 cloned" << std::endl;
     return std::make_unique<ConcretePrototype1>(*this);
   }
 
-  virtual void print() const override
-  {
+  virtual void print() const override {
     std::cout << "ConcretePrototype1 printed" << std::endl;
   }
 };
 
-class ConcretePrototype2 : public Prototype
-{
+class ConcretePrototype2 : public Prototype {
 public:
-  ConcretePrototype2()
-  {
+  ConcretePrototype2() {
     std::cout << "ConcretePrototype2 instantiated" << std::endl;
   }
-  ConcretePrototype2(const ConcretePrototype2& prototype
-                     [[maybe_unused]]) = default;
+  ConcretePrototype2(
+      const ConcretePrototype2& prototype [[maybe_unused]]) = default;
   virtual ~ConcretePrototype2() = default;
 
-  std::unique_ptr<Prototype> clone() const override
-  {
+  std::unique_ptr<Prototype> clone() const override {
     std::cout << "ConcretePrototype2 cloned" << std::endl;
     return std::make_unique<ConcretePrototype2>(*this);
   }
 
-  virtual void print() const override
-  {
+  virtual void print() const override {
     std::cout << "ConcretePrototype2 printed" << std::endl;
   }
 };

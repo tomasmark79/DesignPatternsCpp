@@ -11,29 +11,18 @@
 // the work to the servant class. This design pattern is useful for
 // reducing code duplication and promoting code reuse.
 
-class Servant
-{
+class Servant {
 public:
-  void operate(int& value) const
-  {
-    value += 1;
-  }
+  void operate(int& value) const { value += 1; }
 };
 
-class Client
-{
+class Client {
 public:
-  Client(int value) : m_value(value) {}
+  Client(int value) : m_value(value) { }
 
-  void accept(Servant& servant)
-  {
-    servant.operate(m_value);
-  }
+  void accept(Servant& servant) { servant.operate(m_value); }
 
-  int getValue() const
-  {
-    return m_value;
-  }
+  int getValue() const { return m_value; }
 
 private:
   int m_value;

@@ -10,11 +10,9 @@
 // This design pattern is useful when the implementation of a system is
 // likely to change, but the interface to the system should remain stable.
 
-class ProtectedVariations
-{
+class ProtectedVariations {
 public:
-  ProtectedVariations()
-  {
+  ProtectedVariations() {
     std::cout << "ProtectedVariations::ProtectedVariations()" << std::endl;
   }
 };

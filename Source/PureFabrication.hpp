@@ -16,11 +16,9 @@
 // error handling, or complex calculations. By encapsulating this logic in
 // a separate class, the code becomes more modular and easier to maintain.
 
-class PureFabrication
-{
+class PureFabrication {
 public:
-  PureFabrication()
-  {
+  PureFabrication() {
     std::cout << "PureFabrication::PureFabrication()" << std::endl;
   }
 };

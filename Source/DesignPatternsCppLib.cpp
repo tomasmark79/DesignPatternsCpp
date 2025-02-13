@@ -1,6 +1,5 @@
 #include "DesignPatternsCppLib/DesignPatternsCppLib.hpp"
 
-// #include <EmojiTools/EmojiTools.hpp> // yet dissabled
 #include <iostream>
 #include <memory>
 #include <designpatternscpplib/version.h>
@@ -42,8 +41,7 @@
 #include <Singleton.hpp>
 #include <FactoryMethod.hpp>
 
-DesignPatternsCppLib::DesignPatternsCppLib()
-{
+DesignPatternsCppLib::DesignPatternsCppLib() {
   std::cout << "--- DesignPatternsCppLib v." << DESIGNPATTERNSCPPLIB_VERSION
             << " instantiated ---" << std::endl;
 
@@ -53,18 +51,18 @@ DesignPatternsCppLib::DesignPatternsCppLib()
     IoCScope scope(container);
     auto carManager = container.resolve<ICarManager>();
     carManager->show();
-  } // Automatically clears the container
+  }  // Automatically clears the container
 
   // Immutable Objects
   std::unique_ptr<ImmutableObjects> immutableObjects =
-    std::make_unique<ConcreteImmutableObjects>("name", 1);
+      std::make_unique<ConcreteImmutableObjects>("name", 1);
   immutableObjects->operation();
   std::cout << "ImmutableObjects name: " << immutableObjects->getName()
             << " value: " << immutableObjects->getValue() << std::endl;
 
   // Object Pool
   std::unique_ptr<ObjectPool> objectPool =
-    std::make_unique<ConcreteObjectPool>();
+      std::make_unique<ConcreteObjectPool>();
   objectPool->operation();
   std::unique_ptr<ObjectPool> objectPool2 = objectPool->acquireObject();
   objectPool2->operation();
@@ -140,8 +138,7 @@ DesignPatternsCppLib::DesignPatternsCppLib()
   ConcreteIterator concreteIterator(array, sizeof(array) / sizeof(array[0]));
   std::cout << "Iterator output: ";
   for (concreteIterator.first(); !concreteIterator.isDone();
-       concreteIterator.next())
-  {
+       concreteIterator.next()) {
     std::cout << concreteIterator.currentItem() << " ";
   }
   std::cout << std::endl;
@@ -257,9 +254,9 @@ DesignPatternsCppLib::DesignPatternsCppLib()
   // Decorator
   std::shared_ptr<Component> component = std::make_shared<ConcreteComponent>();
   std::shared_ptr<Component> decoratorA =
-    std::make_shared<ConcreteDecoratorA>(component);
+      std::make_shared<ConcreteDecoratorA>(component);
   std::shared_ptr<Component> decoratorB =
-    std::make_shared<ConcreteDecoratorB>(decoratorA);
+      std::make_shared<ConcreteDecoratorB>(decoratorA);
   decoratorB->Operation();
 
   // Proxy
@@ -308,7 +305,6 @@ DesignPatternsCppLib::DesignPatternsCppLib()
   delete computer;
 }
 
-DesignPatternsCppLib::~DesignPatternsCppLib()
-{
+DesignPatternsCppLib::~DesignPatternsCppLib() {
   std::cout << "--- DesignPatternsCppLib uninstantiated ---" << std::endl;
 }

@@ -3,44 +3,35 @@
 
 #include <iostream>
 
-class Mediator
-{
+class Mediator {
 public:
   virtual void notify(int id) = 0;
 };
 
-class ConcreteMediator : public Mediator
-{
+class ConcreteMediator : public Mediator {
 public:
-  void notify(int id) override
-  {
+  void notify(int id) override {
     std::cout << "ConcreteMediator: notify " << id << std::endl;
   }
 };
 
-class Colleague
-{
+class Colleague {
 public:
-  Colleague(Mediator* mediator) : mediator_(mediator) {}
-  void notify(int id)
-  {
-    mediator_->notify(id);
-  }
+  Colleague(Mediator* mediator) : mediator_(mediator) { }
+  void notify(int id) { mediator_->notify(id); }
 
 private:
   Mediator* mediator_;
 };
 
-class ConcreteColleagueA : public Colleague
-{
+class ConcreteColleagueA : public Colleague {
 public:
-  ConcreteColleagueA(Mediator* mediator) : Colleague(mediator) {}
+  ConcreteColleagueA(Mediator* mediator) : Colleague(mediator) { }
 };
 
-class ConcreteColleagueB : public Colleague
-{
+class ConcreteColleagueB : public Colleague {
 public:
-  ConcreteColleagueB(Mediator* mediator) : Colleague(mediator) {}
+  ConcreteColleagueB(Mediator* mediator) : Colleague(mediator) { }
 };
 
 #endif

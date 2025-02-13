@@ -5,34 +5,26 @@
 #include <list>
 #include <string>
 
-class ComponentComposite
-{
+class ComponentComposite {
 public:
-  virtual void add(ComponentComposite* component [[maybe_unused]]) {}
-  virtual void remove(ComponentComposite* component [[maybe_unused]]) {}
+  virtual void add(ComponentComposite* component [[maybe_unused]]) { }
+  virtual void remove(ComponentComposite* component [[maybe_unused]]) { }
   virtual void operation() = 0;
-  virtual ~ComponentComposite() {}
+  virtual ~ComponentComposite() { }
 };
 
-class Composite : public ComponentComposite
-{
+class Composite : public ComponentComposite {
 public:
-  Composite(std::string name) : name_(name) {}
-  void add(ComponentComposite* component) override
-  {
+  Composite(std::string name) : name_(name) { }
+  void add(ComponentComposite* component) override {
     children_.push_back(component);
   }
-  void remove(ComponentComposite* component) override
-  {
+  void remove(ComponentComposite* component) override {
     children_.remove(component);
   }
-  void operation() override
-  {
+  void operation() override {
     std::cout << "Composite " << name_ << " operation" << std::endl;
-    for (auto child : children_)
-    {
-      child->operation();
-    }
+    for (auto child : children_) { child->operation(); }
   }
 
 private:
@@ -40,12 +32,10 @@ private:
   std::list<ComponentComposite*> children_;
 };
 
-class Leaf : public ComponentComposite
-{
+class Leaf : public ComponentComposite {
 public:
-  Leaf(std::string name) : name_(name) {}
-  void operation() override
-  {
+  Leaf(std::string name) : name_(name) { }
+  void operation() override {
     std::cout << "Leaf " << name_ << " operation" << std::endl;
   }
 

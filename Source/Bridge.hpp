@@ -3,48 +3,37 @@
 
 #include <iostream>
 
-class Bridge
-{
+class Bridge {
 public:
-  virtual ~Bridge() {}
+  virtual ~Bridge() { }
   virtual void operation() = 0;
 };
 
-class Implementor
-{
+class Implementor {
 public:
-  virtual ~Implementor() {}
+  virtual ~Implementor() { }
   virtual void operation() = 0;
 };
 
-class ConcreteImplementorA : public Implementor
-{
+class ConcreteImplementorA : public Implementor {
 public:
-  void operation() override
-  {
+  void operation() override {
     std::cout << "ConcreteImplementorA operation" << std::endl;
   }
 };
 
-class ConcreteImplementorB : public Implementor
-{
+class ConcreteImplementorB : public Implementor {
 public:
-  void operation() override
-  {
+  void operation() override {
     std::cout << "ConcreteImplementorB operation" << std::endl;
   }
 };
 
-class RefinedAbstraction : public Bridge
-{
+class RefinedAbstraction : public Bridge {
 public:
-  RefinedAbstraction(Implementor* implementor) : implementor_(implementor) {}
-  ~RefinedAbstraction()
-  {
-    delete implementor_;
-  }
-  void operation() override
-  {
+  RefinedAbstraction(Implementor* implementor) : implementor_(implementor) { }
+  ~RefinedAbstraction() { delete implementor_; }
+  void operation() override {
     std::cout << "RefinedAbstraction operation" << std::endl;
     implementor_->operation();
   }

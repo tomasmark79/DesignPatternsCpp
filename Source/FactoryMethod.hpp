@@ -3,12 +3,10 @@
 
 #include <string>
 
-class Computer
-{
+class Computer {
 public:
   Computer(std::string computer, std::string model) :
-    computer(computer),
-    model(model){};
+      computer(computer), model(model){};
   ~Computer(){};
 
 public:
@@ -16,8 +14,7 @@ public:
   std::string model;
 };
 
-class ComputerFactory
-{
+class ComputerFactory {
 public:
   ComputerFactory(){};
   ~ComputerFactory(){};

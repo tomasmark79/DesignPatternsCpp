@@ -10,13 +10,9 @@
 // level of indirection between the client code and the implementation of a
 // class.
 
-class Indirection
-{
+class Indirection {
 public:
-  Indirection()
-  {
-    std::cout << "Indirection::Indirection()" << std::endl;
-  }
+  Indirection() { std::cout << "Indirection::Indirection()" << std::endl; }
 };
 
 #endif

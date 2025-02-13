@@ -3,51 +3,33 @@
 
 #include <iostream>
 
-class Subsystem1
-{
+class Subsystem1 {
 public:
-  void operation1()
-  {
-    std::cout << "Subsystem1::operation1" << std::endl;
-  }
+  void operation1() { std::cout << "Subsystem1::operation1" << std::endl; }
 
-  void operation2()
-  {
-    std::cout << "Subsystem1::operation2" << std::endl;
-  }
+  void operation2() { std::cout << "Subsystem1::operation2" << std::endl; }
 };
 
-class Subsystem2
-{
+class Subsystem2 {
 public:
-  void operation1()
-  {
-    std::cout << "Subsystem2::operation1" << std::endl;
-  }
+  void operation1() { std::cout << "Subsystem2::operation1" << std::endl; }
 
-  void operation2()
-  {
-    std::cout << "Subsystem2::operation2" << std::endl;
-  }
+  void operation2() { std::cout << "Subsystem2::operation2" << std::endl; }
 };
 
-class Facade
-{
+class Facade {
 public:
-  Facade()
-  {
+  Facade() {
     subsystem1 = new Subsystem1();
     subsystem2 = new Subsystem2();
   }
 
-  ~Facade()
-  {
+  ~Facade() {
     delete subsystem1;
     delete subsystem2;
   }
 
-  void operation()
-  {
+  void operation() {
     subsystem1->operation1();
     subsystem1->operation2();
     subsystem2->operation1();

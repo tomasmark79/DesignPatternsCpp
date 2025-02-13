@@ -38,7 +38,9 @@ public:
   void registerService() {
     static_assert(std::is_base_of<TInterface, TImplementation>::value,
         "TImplementation must inherit from TInterface");
-    services[typeid(TInterface).name()] = []() { return std::make_shared<TImplementation>(); };
+    services[typeid(TInterface).name()] = []() {
+      return std::make_shared<TImplementation>();
+    };
   }
 
   // Register service with lifetime scope
@@ -48,15 +50,18 @@ public:
         "TImplementation must inherit from TInterface");
 
     std::cout << "Registering service: " << typeid(TInterface).name()
-              << " with implementation: " << typeid(TImplementation).name() << " ["
-              << (scope == LifetimeScope::Singleton ? "Singleton" : "Transient") << "]"
-              << std::endl;
+              << " with implementation: " << typeid(TImplementation).name()
+              << " ["
+              << (scope == LifetimeScope::Singleton ? "Singleton" : "Transient")
+              << "]" << std::endl;
 
     if (scope == LifetimeScope::Singleton) {
       auto instance = std::make_shared<TImplementation>();
       services[typeid(TInterface).name()] = [instance]() { return instance; };
     } else {
-      services[typeid(TInterface).name()] = []() { return std::make_shared<TImplementation>(); };
+      services[typeid(TInterface).name()] = []() {
+        return std::make_shared<TImplementation>();
+      };
     }
   }
 
@@ -76,7 +81,8 @@ public:
     services[typeid(TInterface).name()] = [this]() {
       static std::shared_ptr<void> instance;
       if (!instance) {
-        instance = std::static_pointer_cast<void>(createInstance<TImplementation>());
+        instance =
+            std::static_pointer_cast<void>(createInstance<TImplementation>());
       }
       return instance;
     };
@@ -99,11 +105,13 @@ public:
     try {
       auto it = services.find(typeid(T).name());
       if (it == services.end()) {
-        throw std::runtime_error("Service " + std::string(typeid(T).name()) + " not registered");
+        throw std::runtime_error(
+            "Service " + std::string(typeid(T).name()) + " not registered");
       }
       auto instance = std::static_pointer_cast<T>(it->second());
       if (!instance) {
-        throw std::runtime_error("Failed to create instance of " + std::string(typeid(T).name()));
+        throw std::runtime_error(
+            "Failed to create instance of " + std::string(typeid(T).name()));
       }
       return instance;
     } catch (const std::exception& e) {
@@ -117,23 +125,29 @@ private:
   std::shared_ptr<T> createInstance() {
     if constexpr (std::is_constructible_v<T, std::shared_ptr<IDatabase>>) {
       auto database = resolve<IDatabase>();
-      if (!database) { throw std::runtime_error("Failed to resolve IDatabase dependency"); }
+      if (!database) {
+        throw std::runtime_error("Failed to resolve IDatabase dependency");
+      }
       return std::make_shared<T>(database);
     } else if constexpr (std::is_default_constructible_v<T>) {
       return std::make_shared<T>();
     } else {
-      throw std::runtime_error("Cannot create instance - no matching constructor");
+      throw std::runtime_error(
+          "Cannot create instance - no matching constructor");
     }
   }
 
   template<typename T>
   void validateDependencies() {
     if constexpr (std::is_constructible_v<T, std::shared_ptr<IDatabase>>) {
-      if (!isRegistered<IDatabase>()) { throw std::runtime_error("Missing dependency: IDatabase"); }
+      if (!isRegistered<IDatabase>()) {
+        throw std::runtime_error("Missing dependency: IDatabase");
+      }
     }
   }
 
-  std::unordered_map<std::string, std::function<std::shared_ptr<void>()>> services;
+  std::unordered_map<std::string, std::function<std::shared_ptr<void>()>>
+      services;
 };
 
 // Service collection for fluent registration
@@ -141,13 +155,15 @@ class ServiceCollection {
 public:
   template<typename TInterface, typename TImplementation>
   ServiceCollection& addSingleton() {
-    container.registerService<TInterface, TImplementation>(LifetimeScope::Singleton);
+    container.registerService<TInterface, TImplementation>(
+        LifetimeScope::Singleton);
     return *this;
   }
 
   template<typename TInterface, typename TImplementation>
   ServiceCollection& addTransient() {
-    container.registerService<TInterface, TImplementation>(LifetimeScope::Transient);
+    container.registerService<TInterface, TImplementation>(
+        LifetimeScope::Transient);
     return *this;
   }
 

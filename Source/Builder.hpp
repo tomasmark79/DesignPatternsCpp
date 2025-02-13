@@ -21,26 +21,15 @@
 #include <string>
 
 // Product class is the final object that will be created by the builder
-class Product
-{
+class Product {
 public:
-  void setPartA(const std::string& partA)
-  {
-    m_partA = partA;
-  }
+  void setPartA(const std::string& partA) { m_partA = partA; }
 
-  void setPartB(const std::string& partB)
-  {
-    m_partB = partB;
-  }
+  void setPartB(const std::string& partB) { m_partB = partB; }
 
-  void setPartC(const std::string& partC)
-  {
-    m_partC = partC;
-  }
+  void setPartC(const std::string& partC) { m_partC = partC; }
 
-  void show() const
-  {
+  void show() const {
     std::cout << "Product Parts: " << m_partA << ", " << m_partB << ", "
               << m_partC << std::endl;
   }
@@ -52,13 +41,9 @@ private:
 };
 
 // Builder class is the abstract class that will be implemented by the concrete
-class Builder
-{
+class Builder {
 public:
-  Builder()
-  {
-    std::cout << "Builder instantiated" << std::endl;
-  }
+  Builder() { std::cout << "Builder instantiated" << std::endl; }
   virtual ~Builder() = default;
   virtual void buildPart1() = 0;
   virtual void buildPart2() = 0;
@@ -67,57 +52,35 @@ public:
 };
 
 // ConcreteBuilder class is the concrete class that will implement the Builder
-class ConcreteBuilder : public Builder
-{
+class ConcreteBuilder : public Builder {
 public:
-  ConcreteBuilder() : m_product(new Product())
-  {
+  ConcreteBuilder() : m_product(new Product()) {
     std::cout << "ConcreteBuilder instantiated" << std::endl;
   }
 
-  ~ConcreteBuilder()
-  {
-    delete m_product;
-  }
+  ~ConcreteBuilder() { delete m_product; }
 
-  void buildPart1() override
-  {
-    m_product->setPartA("Part A");
-  }
+  void buildPart1() override { m_product->setPartA("Part A"); }
 
-  void buildPart2() override
-  {
-    m_product->setPartB("Part B");
-  }
+  void buildPart2() override { m_product->setPartB("Part B"); }
 
-  void buildPart3() override
-  {
-    m_product->setPartC("Part C");
-  }
+  void buildPart3() override { m_product->setPartC("Part C"); }
 
-  Product getProduct() override
-  {
-    return *m_product;
-  }
+  Product getProduct() override { return *m_product; }
 
 private:
   Product* m_product;
 };
 
 // Director class is the class that will direct the builder to build the product
-class Director
-{
+class Director {
 public:
   Director() = default;
   ~Director() = default;
 
-  void setBuilder(Builder* builder)
-  {
-    m_builder = builder;
-  }
+  void setBuilder(Builder* builder) { m_builder = builder; }
 
-  void construct()
-  {
+  void construct() {
     m_builder->buildPart1();
     m_builder->buildPart2();
     m_builder->buildPart3();

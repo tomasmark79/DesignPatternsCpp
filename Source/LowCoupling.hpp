@@ -8,13 +8,9 @@
 // create as few dependencies between objects as possible
 // smartly dividing responsibilities
 
-class LowCoupling
-{
+class LowCoupling {
 public:
-  LowCoupling()
-  {
-    std::cout << "LowCoupling::LowCoupling()" << std::endl;
-  }
+  LowCoupling() { std::cout << "LowCoupling::LowCoupling()" << std::endl; }
 };
 
 #endif

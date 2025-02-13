@@ -1,8 +1,7 @@
 #ifndef __DESIGNPATTERNSCPPLIB_H__
 #define __DESIGNPATTERNSCPPLIB_H__
 
-class DesignPatternsCppLib
-{
+class DesignPatternsCppLib {
 public:
   DesignPatternsCppLib();
   ~DesignPatternsCppLib();
@@ -10,4 +9,4 @@ public:
 private:
 };
 
-#endif // __DESIGNPATTERNSCPPLIB_H__
+#endif  // __DESIGNPATTERNSCPPLIB_H__

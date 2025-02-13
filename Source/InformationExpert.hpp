@@ -7,11 +7,9 @@
 
 // Responsibility always lies with the class that has the most information
 
-class InformationExpert
-{
+class InformationExpert {
 public:
-  InformationExpert()
-  {
+  InformationExpert() {
     std::cout << "InformationExpert::InformationExpert()" << std::endl;
   }
 };

@@ -3,18 +3,13 @@
 
 #include <iostream>
 
-class Singleton
-{
+class Singleton {
 private:
-  Singleton()
-  {
-    std::cout << "Singleton instantiated" << std::endl;
-  };
+  Singleton() { std::cout << "Singleton instantiated" << std::endl; };
   ~Singleton(){};
 
 public:
-  static Singleton& getInstance()
-  {
+  static Singleton& getInstance() {
     static Singleton instance;
     return instance;
   }
@@ -22,10 +17,7 @@ public:
   Singleton(Singleton const&) = delete;
   void operator=(Singleton const&) = delete;
 
-  void print()
-  {
-    std::cout << "Singleton printed" << std::endl;
-  }
+  void print() { std::cout << "Singleton printed" << std::endl; }
 };
 
 #endif

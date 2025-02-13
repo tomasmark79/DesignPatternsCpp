@@ -24,13 +24,9 @@
 // 5. When you need to limit the number of concurrent threads that can
 // access a resource.
 
-class ObjectPool
-{
+class ObjectPool {
 public:
-  ObjectPool()
-  {
-    std::cout << "ObjectPool instantiated" << std::endl;
-  }
+  ObjectPool() { std::cout << "ObjectPool instantiated" << std::endl; }
   virtual ~ObjectPool() = default;
   virtual void operation() = 0;
 
@@ -38,24 +34,19 @@ public:
   virtual void releaseObject(std::unique_ptr<ObjectPool> obj) = 0;
 };
 
-class ConcreteObjectPool : public ObjectPool
-{
+class ConcreteObjectPool : public ObjectPool {
 public:
-  ConcreteObjectPool()
-  {
+  ConcreteObjectPool() {
     std::cout << "ConcreteObjectPool instantiated" << std::endl;
   }
   virtual ~ConcreteObjectPool() = default;
 
-  void operation() override
-  {
+  void operation() override {
     std::cout << "ConcreteObjectPool operation" << std::endl;
   }
 
-  std::unique_ptr<ObjectPool> acquireObject() override
-  {
-    if (!pool.empty())
-    {
+  std::unique_ptr<ObjectPool> acquireObject() override {
+    if (!pool.empty()) {
       auto obj = std::move(pool.back());
       pool.pop_back();
       return obj;
@@ -63,8 +54,7 @@ public:
     return std::make_unique<ConcreteObjectPool>();
   }
 
-  void releaseObject(std::unique_ptr<ObjectPool> obj) override
-  {
+  void releaseObject(std::unique_ptr<ObjectPool> obj) override {
     pool.push_back(std::move(obj));
   }
 

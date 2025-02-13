@@ -3,54 +3,34 @@
 
 #include <iostream>
 
-class Receiver
-{
+class Receiver {
 public:
-  void action()
-  {
-    std::cout << "Receiver action" << std::endl;
-  }
+  void action() { std::cout << "Receiver action" << std::endl; }
 };
 
-class Command
-{
+class Command {
 public:
   virtual void execute() = 0;
 };
 
-class ConcreteCommand : public Command
-{
+class ConcreteCommand : public Command {
 public:
-  void execute() override
-  {
-    if (receiver)
-    {
-      receiver->action();
-    }
+  void execute() override {
+    if (receiver) { receiver->action(); }
     std::cout << "ConcreteCommand executed" << std::endl;
   }
 
-  void setReceiver(Receiver* receiver)
-  {
-    this->receiver = receiver;
-  }
+  void setReceiver(Receiver* receiver) { this->receiver = receiver; }
 
 private:
   Receiver* receiver;
 };
 
-class Invoker
-{
+class Invoker {
 public:
-  void setCommand(Command* command)
-  {
-    this->command = command;
-  }
+  void setCommand(Command* command) { this->command = command; }
 
-  void executeCommand()
-  {
-    command->execute();
-  }
+  void executeCommand() { command->execute(); }
 
 private:
   Command* command;

@@ -3,8 +3,7 @@
 
 #include <iostream>
 
-class Iterator
-{
+class Iterator {
 public:
   virtual void first() = 0;
   virtual void next() = 0;
@@ -12,34 +11,18 @@ public:
   virtual int currentItem() const = 0;
 };
 
-class ConcreteIterator : public Iterator
-{
+class ConcreteIterator : public Iterator {
 public:
   ConcreteIterator(int* array, int size) :
-    array_(array),
-    size_(size),
-    current_(0)
-  {}
+      array_(array), size_(size), current_(0) { }
 
-  void first() override
-  {
-    current_ = 0;
-  }
+  void first() override { current_ = 0; }
 
-  void next() override
-  {
-    ++current_;
-  }
+  void next() override { ++current_; }
 
-  bool isDone() const override
-  {
-    return current_ >= size_;
-  }
+  bool isDone() const override { return current_ >= size_; }
 
-  int currentItem() const override
-  {
-    return array_[current_];
-  }
+  int currentItem() const override { return array_[current_]; }
 
 private:
   int* array_;
@@ -47,19 +30,16 @@ private:
   int current_;
 };
 
-class Aggregate
-{
+class Aggregate {
 public:
   virtual Iterator* createIterator() = 0;
 };
 
-class ConcreteAggregate : public Aggregate
-{
+class ConcreteAggregate : public Aggregate {
 public:
-  ConcreteAggregate(int* array, int size) : array_(array), size_(size) {}
+  ConcreteAggregate(int* array, int size) : array_(array), size_(size) { }
 
-  Iterator* createIterator() override
-  {
+  Iterator* createIterator() override {
     return new ConcreteIterator(array_, size_);
   }
 

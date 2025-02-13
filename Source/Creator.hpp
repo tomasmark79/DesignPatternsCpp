@@ -12,13 +12,9 @@
 // the client code. The Creator class is typically used in conjunction with the
 // Factory Method design pattern.
 
-class Creator
-{
+class Creator {
 public:
-  void createProduct()
-  {
-    std::cout << "Creator::createProduct()" << std::endl;
-  }
+  void createProduct() { std::cout << "Creator::createProduct()" << std::endl; }
 };
 
 #endif

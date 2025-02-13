@@ -13,48 +13,31 @@
 
 // **1. Compile-time (static) polymorphism**
 // Function Overloading Example
-void print(int x)
-{
-  std::cout << "Integer: " << x << std::endl;
-}
+void print(int x) { std::cout << "Integer: " << x << std::endl; }
 
-void print(double x)
-{
-  std::cout << "Floating-point: " << x << std::endl;
-}
+void print(double x) { std::cout << "Floating-point: " << x << std::endl; }
 
-void print(std::string x)
-{
-  std::cout << "String: " << x << std::endl;
-}
+void print(std::string x) { std::cout << "String: " << x << std::endl; }
 
 // **2. Run-time (dynamic) polymorphism**
 // Using inheritance and virtual functions
-class Animal
-{
+class Animal {
 public:
-  virtual void sound()
-  { // Virtual function
+  virtual void sound() {  // Virtual function
     std::cout << "The animal makes a sound" << std::endl;
   }
 };
 
-class Dog : public Animal
-{
+class Dog : public Animal {
 public:
-  void sound() override
-  { // Overriding method
+  void sound() override {  // Overriding method
     std::cout << "Woof woof!" << std::endl;
   }
 };
 
-class Cat : public Animal
-{
+class Cat : public Animal {
 public:
-  void sound() override
-  {
-    std::cout << "Meow!" << std::endl;
-  }
+  void sound() override { std::cout << "Meow!" << std::endl; }
 };
 
 #endif

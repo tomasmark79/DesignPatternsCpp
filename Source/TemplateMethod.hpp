@@ -3,13 +3,11 @@
 
 #include <iostream>
 
-class TemplateMethod
-{
+class TemplateMethod {
 public:
   virtual ~TemplateMethod() = default;
 
-  void templateMethod()
-  {
+  void templateMethod() {
     primitiveOperation1();
     primitiveOperation2();
     std::cout << "Template Method" << std::endl;
@@ -20,30 +18,24 @@ protected:
   virtual void primitiveOperation2() = 0;
 };
 
-class ConcreteTemplateMethodA : public TemplateMethod
-{
+class ConcreteTemplateMethodA : public TemplateMethod {
 protected:
-  void primitiveOperation1() override
-  {
+  void primitiveOperation1() override {
     std::cout << "ConcreteTemplateMethodA::primitiveOperation1" << std::endl;
   }
 
-  void primitiveOperation2() override
-  {
+  void primitiveOperation2() override {
     std::cout << "ConcreteTemplateMethodA::primitiveOperation2" << std::endl;
   }
 };
 
-class ConcreteTemplateMethodB : public TemplateMethod
-{
+class ConcreteTemplateMethodB : public TemplateMethod {
 protected:
-  void primitiveOperation1() override
-  {
+  void primitiveOperation1() override {
     std::cout << "ConcreteTemplateMethodB::primitiveOperation1" << std::endl;
   }
 
-  void primitiveOperation2() override
-  {
+  void primitiveOperation2() override {
     std::cout << "ConcreteTemplateMethodB::primitiveOperation2" << std::endl;
   }
 };

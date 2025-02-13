@@ -37,7 +37,7 @@ DerivePointerAlignment: true
 Cpp11BracedListStyle: true
 ConstructorInitializerAllOnOneLineOrOnePerLine: false
 CompactNamespaces: false
-ColumnLimit: 100
+ColumnLimit: 80
 BreakStringLiterals: false
 BreakInheritanceList: AfterColon
 BreakConstructorInitializers: AfterColon

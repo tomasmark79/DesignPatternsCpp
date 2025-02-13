@@ -11,13 +11,9 @@
 // design pattern is used to ensure that a class has a single, well-defined
 // responsibility.
 
-class HighCohesion
-{
+class HighCohesion {
 public:
-  HighCohesion()
-  {
-    std::cout << "HighCohesion::HighCohesion()" << std::endl;
-  }
+  HighCohesion() { std::cout << "HighCohesion::HighCohesion()" << std::endl; }
 };
 
 #endif

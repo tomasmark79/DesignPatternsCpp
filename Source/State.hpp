@@ -3,48 +3,35 @@
 
 #include <iostream>
 
-class State
-{
+class State {
 public:
-  virtual ~State() {}
+  virtual ~State() { }
   virtual void handle() = 0;
 };
 
-class ConcreteStateA : public State
-{
+class ConcreteStateA : public State {
 public:
-  void handle() override
-  {
+  void handle() override {
     std::cout << "ConcreteStateA handles request." << std::endl;
   }
 };
 
-class ConcreteStateB : public State
-{
+class ConcreteStateB : public State {
 public:
-  void handle() override
-  {
+  void handle() override {
     std::cout << "ConcreteStateB handles request." << std::endl;
   }
 };
 
-class ContextState
-{
+class ContextState {
 public:
-  ContextState(State* state) : state(state) {}
-  ~ContextState()
-  {
-    delete state;
-  }
-  void setState(State* state)
-  {
+  ContextState(State* state) : state(state) { }
+  ~ContextState() { delete state; }
+  void setState(State* state) {
     delete this->state;
     this->state = state;
   }
-  void request()
-  {
-    state->handle();
-  }
+  void request() { state->handle(); }
 
 private:
   State* state;
