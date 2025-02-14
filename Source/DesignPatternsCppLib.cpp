@@ -4,6 +4,7 @@
 #include <memory>
 #include <designpatternscpplib/version.h>
 
+#include <IoCDependencyInjectionLog.hpp>
 #include <IoCDependencyInjection.hpp>
 
 #include <ImmutableObjects.hpp>
@@ -45,13 +46,44 @@ DesignPatternsCppLib::DesignPatternsCppLib() {
   std::cout << "--- DesignPatternsCppLib v." << DESIGNPATTERNSCPPLIB_VERSION
             << " instantiated ---" << std::endl;
 
-  // Dependency Injection
-  IoCContainer container;
+  // Dependency Injection Logs
   {
+    using namespace IoCDependencyInjectionLog;
+    IoCContainer container;
     IoCScope scope(container);
-    auto carManager = container.resolve<ICarManager>();
-    carManager->show();
-  }  // Automatically clears the container
+    auto logger = container.resolve<ILogger>();
+    logger->log("Test log message");
+    auto logManager = container.resolve<ILogManager>();
+    logManager->logMessage("Test log message from LogManager");
+    container.registerServiceWithDependencies<ILogManager, LogManager>();
+  }  // Dependency Injection Log
+
+  // Dependency Injection Cars
+  {
+    using namespace IoCDependencyInjection;
+    {
+      IoCContainer container;
+      IoCScope scope(container);
+      auto carManager = container.resolve<ICarManager>();
+      carManager->show();
+    }
+    {
+      IoCContainer container;
+      container.registerService<IDatabase, Database>(LifetimeScope::Singleton);
+      container
+          .registerServiceWithDependencies<ICarRepository, CarRepository>();
+      auto database = container.resolve<IDatabase>();
+      auto carRepository = container.resolve<ICarRepository>();
+      carRepository->show();
+    }
+    {
+      ServiceCollection services;
+      services
+          .addSingleton<IDatabase, Database>()
+          // .addTransient<ICarRepository, CarRepository>();
+          .addTransientWithDependencies<ICarRepository, CarRepository>();
+    }
+  }  // Dependency Injection Cars
 
   // Immutable Objects
   std::unique_ptr<ImmutableObjects> immutableObjects =

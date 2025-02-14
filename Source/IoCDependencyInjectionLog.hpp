@@ -1,5 +1,5 @@
-#ifndef IOCDEPENDENCYINJECTION_H
-#define IOCDEPENDENCYINJECTION_H
+#ifndef IOCDEPENDENCYINJECTIONLOG_H
+#define IOCDEPENDENCYINJECTIONLOG_H
 
 #include <iostream>
 #include <unordered_map>
@@ -9,7 +9,8 @@
 #include <stdexcept>
 #include <functional>
 
-namespace IoCDependencyInjection {
+namespace IoCDependencyInjectionLog {
+
   enum class LifetimeScope { Singleton, Transient };
 
   class IDatabase {
@@ -18,16 +19,16 @@ namespace IoCDependencyInjection {
     virtual void connect() = 0;
   };
 
-  class ICarRepository {
+  class ILogger {
   public:
-    virtual ~ICarRepository() = default;
-    virtual void show() = 0;
+    virtual ~ILogger() = default;
+    virtual void log(const std::string& message) = 0;
   };
 
-  class ICarManager {
+  class ILogManager {
   public:
-    virtual ~ICarManager() = default;
-    virtual void show() = 0;
+    virtual ~ILogManager() = default;
+    virtual void logMessage(const std::string& message) = 0;
   };
 
   class IoCContainer {
@@ -68,11 +69,16 @@ namespace IoCDependencyInjection {
     }
 
     // Register service with automatic dependency resolution
+    /// @tparam TInterface - interface type
+    /// @tparam TImplementation - implementation type
     template<typename TInterface, typename TImplementation>
     void registerServiceWithDependencies() {
       static_assert(std::is_base_of<TInterface, TImplementation>::value,
           "TImplementation must inherit from TInterface");
+      // Zde je zaregistrována služba TInterface s implementací TImplementation.
       services[typeid(TInterface).name()] = [this]() {
+        // Zde je získána instance třídy TImplementation z kontejneru a
+        // vrácena jako std::shared_ptr<TInterface>.
         return std::static_pointer_cast<void>(
             createInstance<TImplementation>());
       };
@@ -102,20 +108,26 @@ namespace IoCDependencyInjection {
       std::cout << "IoC container cleared" << std::endl;
     }
 
-    // Resolve instance of service
+    /// @tparam T - type of service to resolve
+    /// @return shared_ptr<T> - resolved service instance
     template<typename T>
     std::shared_ptr<T> resolve() {
       try {
+        // Zde je získána instance třídy T z kontejneru a vrácena jako std::shared_ptr<T>.
         auto it = services.find(typeid(T).name());
+        // Pokud instance není nalezena, dojde k vyhození výjimky.
         if (it == services.end()) {
           throw std::runtime_error(
               "Service " + std::string(typeid(T).name()) + " not registered");
         }
+        // Zde je získána instance třídy T z kontejneru a vrácena jako std::shared_ptr<T>.
         auto instance = std::static_pointer_cast<T>(it->second());
+        // Pokud instance není vytvořena, dojde k vyhození výjimky.
         if (!instance) {
           throw std::runtime_error(
               "Failed to create instance of " + std::string(typeid(T).name()));
         }
+        // V opačném případě je instance vrácena.
         return instance;
       } catch (const std::exception& e) {
         std::cerr << "Error resolving service: " << e.what() << std::endl;
@@ -124,21 +136,29 @@ namespace IoCDependencyInjection {
     }
 
   private:
+    /// @brief  Vytvoří instanci třídy T a vstříkne do ní závislosti, které jsou v kontejneru registrovány.
+    /// @tparam T - typ třídy, která má být vytvořena
+    /// @return std::shared_ptr<T> - instance třídy T
     template<typename T>
     std::shared_ptr<T> createInstance() {
+      // Pokud třída T vyžaduje v konstruktoru závislost IDatabase,
       if constexpr (std::is_constructible_v<T, std::shared_ptr<IDatabase>>) {
+        // kontejner nejprve resolvuje (získý instanci) tuto závislost pomocí resolve<IDatabase>().
         auto database = resolve<IDatabase>();
         if (!database) {
           throw std::runtime_error("Failed to resolve IDatabase dependency");
         }
+        // Poté vytvoří instanci třídy T a předá jí resolvovanou závislost IDatabase.
         return std::make_shared<T>(database);
       } else if constexpr (std::is_default_constructible_v<T>) {
+        // Pokud třída T nevyžaduje žádné závislosti, vytvoří se instance bez parametrů.
         return std::make_shared<T>();
       } else {
+        // Pokud třída T vyžaduje závislosti, které nejsou v kontejneru registrovány, dojde k vyhození výjimky.
         throw std::runtime_error(
             "Cannot create instance - no matching constructor");
       }
-    }
+    }  // Tímto způsobem dochází k automatickému vstřikování závislostí do tříd, které je vyžadují.
 
     template<typename T>
     void validateDependencies() {
@@ -188,33 +208,35 @@ namespace IoCDependencyInjection {
     }
   };
 
-  class CarRepository : public ICarRepository {
+  class Logger : public ILogger {
   private:
     std::shared_ptr<IDatabase> db;
 
   public:
-    explicit CarRepository(std::shared_ptr<IDatabase> database) : db(database) {
+    // Zde je závislost IDatabase vstřikována do třídy Logger přes její konstruktor. Tato závislost je poté použita v metodě log.
+    explicit Logger(std::shared_ptr<IDatabase> database) : db(database) {
       if (!database) { throw std::invalid_argument("database cannot be null"); }
     }
 
-    void show() override {
-      std::cout << "CarRepository initialized" << std::endl;
-      db->connect();
+    void log(const std::string& message) override {
+      std::cout << "Logging message: " << message << std::endl;
+      db->connect();  // Simulate saving log to database
     }
   };
 
-  class CarManager : public ICarManager {
+  class LogManager : public ILogManager {
   private:
     std::shared_ptr<IDatabase> db;
 
   public:
-    explicit CarManager(std::shared_ptr<IDatabase> database) : db(database) {
+    // Zde je závislost IDatabase vstřikována do třídy LogManager přes její konstruktor. Tato závislost je poté použita v metodě logMessage.
+    explicit LogManager(std::shared_ptr<IDatabase> database) : db(database) {
       if (!database) { throw std::invalid_argument("database cannot be null"); }
     }
 
-    void show() override {
-      std::cout << "CarManager initialized" << std::endl;
-      db->connect();
+    void logMessage(const std::string& message) override {
+      std::cout << "LogManager processing message: " << message << std::endl;
+      db->connect();  // Simulate saving log to database
     }
   };
 
@@ -227,12 +249,10 @@ namespace IoCDependencyInjection {
     explicit IoCScope(IoCContainer& c) : container(c) {
       // Register services
       container.registerService<IDatabase, Database>(LifetimeScope::Singleton);
-      container
-          .registerServiceWithDependencies<ICarRepository, CarRepository>();
-      container.registerServiceWithDependencies<ICarManager, CarManager>();
+      container.registerServiceWithDependencies<ILogger, Logger>();
+      container.registerServiceWithDependencies<ILogManager, LogManager>();
     }
     ~IoCScope() { container.clear(); }
   };
-
-}  // namespace IoCDependencyInjection
-#endif  // IOCDEPENDENCYINJECTION_H
+}  // namespace IoCDependencyInjectionLog
+#endif  // IOCDEPENDENCYINJECTIONLOG_H
