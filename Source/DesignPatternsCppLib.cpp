@@ -170,7 +170,7 @@ DesignPatternsCppLib::DesignPatternsCppLib() {
   ConcreteIterator concreteIterator(array, sizeof(array) / sizeof(array[0]));
   std::cout << "Iterator output: ";
   for (concreteIterator.first(); !concreteIterator.isDone();
-       concreteIterator.next()) {
+      concreteIterator.next()) {
     std::cout << concreteIterator.currentItem() << " ";
   }
   std::cout << std::endl;
